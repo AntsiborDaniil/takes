@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Takes
 
-## Getting Started
+Сайт магазина ИИ-рецептов для видео и контента. Загружаешь подкаст или лекцию, выбираешь рецепт и получаешь нарезки, титры и тексты. Каждый рецепт проходит автоматическую проверку качества, не прошёл — деньги возвращаем.
 
-First, run the development server:
+Сейчас это витрина с демо-данными: цифры проверок в интерфейсе — демо до запуска и подписаны как демо.
+
+## Маршруты
+
+| Путь | Что там |
+|---|---|
+| `/` | Лендинг |
+| `/recipes` | Каталог рецептов с поиском и фильтрами |
+| `/recipes/[slug]` | Страница рецепта |
+| `/design` | Живой стайлгайд «Дизайн-система Takes» |
+
+## Стек
+
+- Next.js 16 (App Router, Turbopack, Cache Components), React 19, TypeScript strict
+- Tailwind CSS v4, токены в `src/styles/tokens.css`
+- `motion/react` для анимаций, Lenis для плавного скролла мышью
+- `lucide-react` для иконок
+- Шрифты через `next/font/google`: Unbounded, Inter, JetBrains Mono
+- pnpm
+
+## Запуск
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm build    # продакшен-сборка
+pnpm start    # запуск собранного
+pnpm lint     # eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Проверка типов: `pnpm exec tsc --noEmit`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Структура
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/                 маршруты, layout, not-found, icon.svg
+  components/
+    ui/                атомы: Button, Badge, Container, Section, Logo, Viewfinder, RecDot, Timecode
+    motion/            Reveal, SplitText, Magnetic, TiltCard, Marquee, CountUp, Scramble, BeforeAfter
+    layout/            Header, Footer, ThemeToggle
+    sections/          секции страниц
+    clips/             анимированные клипы без футажа
+  content/             тексты и данные, никакого копирайта в JSX
+  lib/                 cn, токены движения, хуки, форматирование
+  styles/tokens.css    дизайн-токены
+```
 
-## Learn More
+## Документация
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [CONVENTIONS.md](./CONVENTIONS.md) — правила кода, SSR, анимаций, копирайта и замороженные контракты.
+- [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) — дизайн-система и QA-чеклист из 15 пунктов.
+- Вживую — на странице `/design`.
+# takes
